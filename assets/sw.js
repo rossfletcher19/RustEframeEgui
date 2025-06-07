@@ -1,7 +1,7 @@
 var cacheName = 'egui-template-pwa';
 var filesToCache = [
   './',
-  './index.html',
+  './index.htmldev#',
   './rust_eframe_egui.js',
   './rust_eframe_egui_bg.wasm',
 ];

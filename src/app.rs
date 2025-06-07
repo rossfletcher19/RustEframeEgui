@@ -155,7 +155,7 @@ Scalar type represents a single value. Rust has four primary scalar types: integ
         });
 
         egui::CentralPanel::default().show(ctx, |ui| {
-            ui.heading("rust_eframe_egui project, a learning project following along and building with the Rust book");
+            ui.heading("rust_eframe_egui project, a learning project following along and building with the Rust book. Find the Rust Book Below!");
 
             ui.hyperlink_to("The Rust Programming Language book", "https://doc.rust-lang.org/stable/book");
 
