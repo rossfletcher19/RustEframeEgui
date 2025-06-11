@@ -2,9 +2,13 @@
 
 Built using [eframe_template](https://github.com/emilk/eframe_template)
 
+https://rossfletcher19.github.io/RustEframeEgui/
+
 This project is a Rust application that follows along with [*The Rust Programming Language* book (aka "The Rust Book")](https://doc.rust-lang.org/book/), but with an interactive twist: it includes a modern GUI built using [`egui`](https://github.com/emilk/egui) and [`eframe`](https://github.com/emilk/egui/tree/master/crates/eframe).
 
 The goal is to learn Rust concepts by applying them in a real-world GUI application.
+
+See it [`here`](https://rossfletcher19.github.io/RustEframeEgui/) at gh-pages.
 
 ---
 
