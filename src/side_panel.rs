@@ -1,7 +1,7 @@
 use crate::rustbook_code_blocks::{self};
 use eframe::egui;
 
-pub fn side_nav_ui(ctx: &egui::Context, spp1: &mut bool) {
+pub fn side_panel_ui(ctx: &egui::Context, spp1: &mut bool) {
     egui::SidePanel::left("side_nav")
         .exact_width(250.0)
         .show(ctx, |ui| {

@@ -1,4 +1,4 @@
-use crate::side_nav::{self};
+use crate::side_panel::{self};
 
 /// We derive Deserialize/Serialize so we can persist app state on shutdown.
 #[derive(serde::Deserialize, serde::Serialize)]
@@ -120,7 +120,7 @@ impl eframe::App for TemplateApp {
             });
         });
 
-        side_nav::side_nav_ui(ctx, &mut self.show_popup_panel1);
+        side_panel::side_panel_ui(ctx, &mut self.show_popup_panel1);
 
         egui::CentralPanel::default().show(ctx, |ui| {
             ui.heading("rust_eframe_egui project, a learning project following along and building with the Rust book. Find the Rust Book Below!");
