@@ -1,3 +1,5 @@
+use crate::side_nav::{self};
+
 /// We derive Deserialize/Serialize so we can persist app state on shutdown.
 #[derive(serde::Deserialize, serde::Serialize)]
 #[serde(default)] // if we add new fields, give them default values when deserializing old state
@@ -7,7 +9,7 @@ pub struct TemplateApp {
     counter: i32,
     name_input: String,
     x: i32,
-    show_popup: bool,
+    show_popup_panel1: bool,
     first_frame: bool,
     language: String,
     code: String,
@@ -28,7 +30,7 @@ impl Default for TemplateApp {
             counter: 0,
             name_input: String::new(),
             x: 5,
-            show_popup: false,
+            show_popup_panel1: false,
             first_frame: true,
             language: "rs".into(),
             code: String::new(),
@@ -98,73 +100,7 @@ impl eframe::App for TemplateApp {
             ctx.set_visuals(egui::Visuals::light());
             self.first_frame = false;
         }
-
-        egui::SidePanel::left("side_nav")
-            .exact_width(250.0)
-            .show(ctx, |ui| {
-                ui.heading("Sidebar");
-                if ui
-                    .button("📦 Variable and Mutability & DataTypes")
-                    .clicked()
-                {
-                    self.show_popup = true;
-                }
-            });
-
-        if self.show_popup {
-            egui::Area::new(egui::Id::new("popup_panel"))
-                // .fixed_pos(egui::pos2(200.0, 500.0)) // offset from sidebar
-                .movable(true)
-                .show(ctx, |ui| {egui::Frame::popup(ui.style())
-                .fill(egui::Color32::from_gray(30))
-                        .stroke(egui::Stroke::new(1.0, egui::Color32::WHITE))
-                        .show(ui, |ui| {
-                            ui.label("This is a popup panel!");
-                            let code = r#"
-//Variable and Mutability & DataTypes in Rust
-
-// This code would not compile, because by default, variables are immutable, and as the RustBook states, 'When a variable is immutable, once a value is bound to a name, you cant change that value.'
-fn main() {
-    let x = 5;
-    println!("The value of x is: {x}");
-    x = 6;
-    println!("The value of x is: {x}");
-}
-
-Good code that would compile bc value is declared mutable,
-
-fn main() {
-    let mut x = 5;
-    println!("The value of x is: {x}");
-    x = 6;
-    println!("The value of x is: {x}");
-}
-
-// ahhh Data Types in Rust, they are beautiful and we know exactly what the are, always. That feels good doesnt it?
-
-Look at two data types in Rust: Scalar and compound
-
-Scalar type represents a single value. Rust has four primary scalar types: integers, floating-point numbers, Booleans, and characters. similar to other programming languages.
-
-// Integers
-
-
-"#;
-
-                ui.add(
-                    egui::TextEdit::multiline(&mut code.to_string())
-                        .font(egui::TextStyle::Monospace) // Use monospaced font
-                        .code_editor() // Enables code styling
-                        // .desired_rows(13)
-                        .lock_focus(true)
-                        .desired_width(400.0),
-                );
-                            if ui.button("❌ Close").clicked() {
-                                self.show_popup = false;
-                            }
-                        });
-                });
-        }
+        side_nav::side_nav_ui(ctx, &mut self.show_popup_panel1);
 
         // if self.image.is_none() {
         //     self.image = Some(self.load_image_to_texture(ctx, ""));

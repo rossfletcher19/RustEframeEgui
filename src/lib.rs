@@ -2,3 +2,5 @@
 
 mod app;
 pub use app::TemplateApp;
+mod rustbook_code_blocks;
+mod side_nav;
