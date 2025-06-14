@@ -1,5 +1,8 @@
+// string constants for side_nav popup panels
+
+// const for Variable, Mutability, & DataTypes popup
 pub const VARIABLES_MUTABILITY_DATATYPES: &str = r#"
-//Variable and Mutability & DataTypes in Rust
+//Variables, Mutability & DataTypes in Rust
 
 // This code would not compile, because by default, variables are immutable, and as the RustBook states, 'When a variable is immutable, once a value is bound to a name, you cant change that value.'
 fn main() {

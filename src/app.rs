@@ -14,7 +14,7 @@ pub struct TemplateApp {
     language: String,
     code: String,
 
-    // This how you opt-out of serialization of a field
+    // This is how you opt-out of serialization of a field
     #[serde(skip)]
     value: f32,
 }
@@ -100,11 +100,6 @@ impl eframe::App for TemplateApp {
             ctx.set_visuals(egui::Visuals::light());
             self.first_frame = false;
         }
-        side_nav::side_nav_ui(ctx, &mut self.show_popup_panel1);
-
-        // if self.image.is_none() {
-        //     self.image = Some(self.load_image_to_texture(ctx, ""));
-        // }
 
         egui::TopBottomPanel::top("top_panel").show(ctx, |ui| {
             // The top panel is often a good place for a menu bar:
@@ -124,6 +119,8 @@ impl eframe::App for TemplateApp {
                 egui::widgets::global_theme_preference_buttons(ui);
             });
         });
+
+        side_nav::side_nav_ui(ctx, &mut self.show_popup_panel1);
 
         egui::CentralPanel::default().show(ctx, |ui| {
             ui.heading("rust_eframe_egui project, a learning project following along and building with the Rust book. Find the Rust Book Below!");
