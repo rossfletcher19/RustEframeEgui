@@ -41,6 +41,12 @@ pub fn central_panel_ui(
                 *value += 1.0;
             }
 
+            if label.is_empty() {
+
+            } else {
+                ui.label(format!("Your text shows here: {}", label));
+            }
+
             ui.separator();
 
         egui::Area::new(egui::Id::new("code_area1")).movable(true).show(ctx, |ui| {
@@ -146,6 +152,8 @@ fn main() {
                         ui.label(format!("Counter value: {}", counter));
 
                         if name_input.is_empty() {
+
+                        } else {
                             ui.label(format!("Welcome, {}!", name_input));
                         }
                     });
