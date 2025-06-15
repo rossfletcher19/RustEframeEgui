@@ -2,7 +2,7 @@
 
 // const for Variable, Mutability, & DataTypes popup
 pub const VARIABLES_MUTABILITY_DATATYPES: &str = r#"
-//Variables, Mutability & DataTypes in Rust
+Variables, Mutability & DataTypes in Rust
 
 // This code would not compile, because by default, variables are immutable, and as the RustBook states, 'When a variable is immutable, once a value is bound to a name, you cant change that value.'
 fn main() {
@@ -12,7 +12,7 @@ fn main() {
     println!("The value of x is: {x}");
 }
 
-Good code that would compile bc value is declared mutable,
+// Good code that would compile bc value is declared mutable,
 
 fn main() {
     let mut x = 5;
@@ -21,48 +21,60 @@ fn main() {
     println!("The value of x is: {x}");
 }
 
-// ahhh Data Types in Rust, they are beautiful and we know exactly what the are, always. That feels good doesnt it?
+___________________________________________________________________________________
+Data Types
 
-Look at two data types in Rust: Scalar and compound
+// in Rust, Data Types are beautiful as we know exactly what the are, always. That feels good doesnt it? Every value in Rust has a data type. Rust is a statically type coding language and must know data types at compile time.
 
-Scalar type represents a single value. Rust has four primary scalar types: integers, floating-point numbers, Booleans, and characters. similar to other programming languages.
+let number_guess: u32 = "42".parse().expect("Not a number!");
 
-// Integers
+if the `: u32` type annotation is not added to the code above, the compiler would throw an error, `error[E0284]: type annotations needed`
 
-Integers are numbers without a fractional component. It Chapter 2 of the Rust book we used the u32 type. The u32 type indicates that the value associated with it should be an unsigned integer that takes up 32 bits of space. Signed or unsigned refer to whether the number can be negative, i.e. if the number needs to have a sign(signed), or if the number can only ever be positive(unsigned).
+// Look at two data types in Rust: Scalar and compound
 
-// Floating Point Types
+// Scalar type represents a single value. Rust has four primary scalar types: integers, floating-point numbers, Booleans, and characters. similar to other programming languages.
 
-Rust has two primitive types for floating-point numbers(numbers with decimals).
+**Integers**
 
-The types are f32 and f64, 32 bits and 64 bits respectively.
+// Integers are numbers without a fractional component. It Chapter 2 of the Rust book we used the u32 type. The u32 type indicates that the value associated with it should be an unsigned integer that takes up 32 bits of space. Signed or unsigned refer to whether the number can be negative, i.e. if the number needs to have a sign(signed), or if the number can only ever be positive(unsigned).
 
-Default type is f64 bc on modern CPUs it about the same speed as f32 but capable of more precisness. All floating-point types are signed.
+let number_guess: u32 = "42".parse().expect("Not a number!");
 
-Here are floating point numbers doing their thing,
+Floating Point Types
+
+// Rust has two primitive types for floating-point numbers(numbers with decimals).
+
+// The types are f32 and f64, 32 bits and 64 bits respectively.
+
+// Default type is f64 bc on modern CPUs it about the same speed as f32 but capable of more precisness. All floating-point types are signed.
+
+// Here are floating point numbers doing their thing,
 
 fn main() {
   let x = 9.0; // f64
   let y: f32 = 6.0 // f32
 }
 
-// Numeric Operations
 
-Rust supports basic arithmetic: addition (+), subtraction (-), multiplication (\*), division (/), and remainder (%).
-Integer division truncates toward zero. Example:
+**Numeric Operations**
+
+// Rust supports basic arithmetic: addition (+), subtraction (-), multiplication (\*), division (/), and remainder (%).
+// Integer division truncates toward zero to the nearest integer.
+
+Example:
 
 let sum = 5 + 10;
 let remainder = 43 % 5;
-____________________
-// Boolean Type
+
+**Boolean Type**
 
 Rust’s `bool` type represents either `true` or `false` and is 1 byte in size.
 Used mainly in conditional logic:
 
 let t = true;
 let f: bool = false;
-____________________
-// Character Type
+
+**Character Type**
 
 Rust’s `char` type represents a Unicode Scalar Value (4 bytes).
 It can store a wide range of characters, including emojis and non-Latin scripts.
@@ -70,10 +82,10 @@ Character literals use single quotes:
 
 let c = 'z';
 let emoji = '😻';
-_____________________
-// Compound Types
+_______________________________________________________________________________________
+Compound Types
 
-// Tuples
+**Tuples**
 
 Tuples group multiple values of different types into a single, fixed-size structure:
 
@@ -82,8 +94,8 @@ let (x, y, z) = tup;
 let first = tup.0;
 
 The unit type `()` is an empty tuple used for functions that return no value.
-_____________________
-// Arrays
+
+**Arrays**
 
 Arrays store multiple values of the same type with a fixed length:
 
@@ -97,4 +109,13 @@ let first = a[0];
 let second = a[1];
 
 Accessing an out-of-bounds index causes a runtime panic to maintain memory safety.
+"#;
+
+// const for Variable, Mutability, & DataTypes popup
+pub const FUNCTIONS: &str = r#"
+// Functions
+
+Functions are used prevalently in Rust.
+
+There is one of the most important funtions, the 'main' function.
 "#;
