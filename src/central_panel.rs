@@ -21,6 +21,9 @@ pub fn central_panel_ui(
     name_input: &mut String,
     counter: &mut i32,
     x: &mut i32,
+    show_area1: &mut bool,
+    show_area2: &mut bool,
+    show_area3: &mut bool,
 ) {
     egui::CentralPanel::default().show(ctx, |ui| {
             ui.heading("rust_eframe_egui project, a learning project following along and building with the Rust book. Find the Rust Book Below!");
@@ -49,7 +52,26 @@ pub fn central_panel_ui(
 
             ui.separator();
 
-        egui::Area::new(egui::Id::new("code_area1")).movable(true).show(ctx, |ui| {
+
+
+            ui.horizontal(|ui| {
+                ui.add(egui::github_link_file!(
+                "https://github.com/emilk/eframe_template/blob/main/",
+                "Source code."
+            ));
+                if ui.button("Toggle Area 1").clicked() {
+                    *show_area1 = !*show_area1;
+                }
+                if ui.button("Toggle Area 2").clicked() {
+                    *show_area2 = !*show_area2;
+                }
+                if ui.button("Toggle Area 3").clicked() {
+                    *show_area3 = !*show_area3;
+                }
+            });
+
+            if *show_area1 {
+            egui::Area::new(egui::Id::new("code_area1")).movable(true).show(ctx, |ui| {
                 ui.label("Drag and Reposition an Area using the 'Rustferris' image in the top left of each area, or anywhere else on an Area it seems! just not on text. The position of an area persists from where it was last dragged and positioned");
                 ui.add(
                     egui::Image::new(egui::include_image!("../assets/Rustferris2.gif"))
@@ -113,8 +135,10 @@ fn main() {
                         .layouter(&mut layouter),
                 );
             });
+        }
 
-        egui::Area::new(egui::Id::new("my_area2"))
+        if *show_area2 {
+            egui::Area::new(egui::Id::new("my_area2"))
             .movable(true)
             .show(ctx, |ui| {
                 egui::Frame::new() // Start with no built-in padding/frame
@@ -159,6 +183,9 @@ fn main() {
                     });
             });
 
+        }
+
+        if *show_area3 {
             egui::Area::new(egui::Id::new("my_area"))
             .movable(true)
             .show(ctx, |ui| {
@@ -175,11 +202,7 @@ fn main() {
                         .corner_radius(5),
                 );
             });
-
-            ui.add(egui::github_link_file!(
-                "https://github.com/emilk/eframe_template/blob/main/",
-                "Source code."
-            ));
+        }
 
             ui.with_layout(egui::Layout::bottom_up(egui::Align::LEFT), |ui| {
                 powered_by_egui_and_eframe(ui);
