@@ -6,7 +6,7 @@ This project is a Rust application that follows along with [*The Rust Programmin
 
 The goal is to learn Rust concepts by applying them in a real-world GUI application.
 
-App is best viewed [`here`](https://rossfletcher19.github.io/RustEframeEgui/) at gh-pages on a desktop browser, or compiled natively on pc.
+App is best viewed [`here`](https://rusteframeegui.netlify.app/) on a desktop browser, or compiled natively on pc.
 
 ---
 
