@@ -42,7 +42,10 @@ pub fn side_panel_ui(ctx: &egui::Context, state: &mut SidePanelState) {
         });
 
     if state.spp1 {
-        egui::Window::new("📦 Variables, Mutability & DataTypes").show(ctx, |ui| {
+        egui::Window::new("📦 Variables, Mutability & DataTypes")
+        .resizable(true)
+        .vscroll(true)
+        .show(ctx, |ui| {
             ui.label("📦 Variables, Mutability & DataTypes");
             let theme = egui_extras::syntax_highlighting::CodeTheme::from_memory(ui.ctx(), ui.style());
             let code = rustbook_code_blocks::VARIABLES_MUTABILITY_DATATYPES;
@@ -59,7 +62,7 @@ pub fn side_panel_ui(ctx: &egui::Context, state: &mut SidePanelState) {
             };
 
             egui::ScrollArea::vertical()
-                .max_height(600.0) // Limit height for scrollability
+            .max_height(500.0) // Limit height for scrollability
                 .show(ui, |ui| {
                     ui.add_sized(
                         [ui.available_width(), 800.0], // Large height to simulate overflow
@@ -79,7 +82,10 @@ pub fn side_panel_ui(ctx: &egui::Context, state: &mut SidePanelState) {
     }
 
     if state.spp2 {
-        egui::Window::new("📦 Functions").show(ctx, |ui| {
+        egui::Window::new("📦 Functions")
+        .resizable(true)
+        .vscroll(true)
+        .show(ctx, |ui| {
             ui.label("📦 Functions");
             let theme = egui_extras::syntax_highlighting::CodeTheme::from_memory(ui.ctx(), ui.style());
             let code = rustbook_code_blocks::FUNCTIONS;
@@ -96,7 +102,7 @@ pub fn side_panel_ui(ctx: &egui::Context, state: &mut SidePanelState) {
             };
 
             egui::ScrollArea::vertical()
-                .max_height(600.0) // Limit height for scrollability
+                .max_height(300.0) // Limit height for scrollability
                 .show(ui, |ui| {
                     ui.add_sized(
                         [ui.available_width(), 800.0], // Large height to simulate overflow
