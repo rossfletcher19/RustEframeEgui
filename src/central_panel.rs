@@ -55,10 +55,8 @@ pub fn central_panel_ui(
 
 
             ui.horizontal(|ui| {
-                ui.add(egui::github_link_file!(
-                "https://github.com/emilk/eframe_template/blob/main/",
-                "Source code."
-            ));
+
+                ui.hyperlink_to("eframe source code.", "https://github.com/emilk/eframe_template");
                 if ui.button("Toggle Area 1").clicked() {
                     *show_area1 = !*show_area1;
                 }
