@@ -1,5 +1,5 @@
 [build]
-  command = "trunk build --release"
+  command = "rustup target add wasm32-unknown-unknown && trunk build --release"
   publish = "dist"
 
   # rustup target add wasm32-unknown-unknown && cargo install trunk &&
