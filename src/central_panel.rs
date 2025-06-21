@@ -1,4 +1,5 @@
 use eframe::egui;
+use egui::RichText;
 
 fn increment(counter: &mut i32) {
     *counter += 1;
@@ -26,13 +27,21 @@ pub fn central_panel_ui(
     show_area3: &mut bool,
 ) {
     egui::CentralPanel::default().show(ctx, |ui| {
-            ui.heading("rust_eframe_egui project, a learning project following along and building with the Rust book. Find the Rust Book Below!");
+        ui.horizontal(|ui|{
+            ui.add(
+                    egui::Image::new(egui::include_image!("../assets/Rust_logo_animated1.gif"))
+                        .fit_to_exact_size(egui::vec2(50.0, 50.0))
+                        .corner_radius(5),
+                );
+                ui.heading(RichText::new("rust_eframe_egui project, a learning project following along and building with the Rust book. Find the Rust Book Below!")
+                    .color(egui::Color32::from_rgb(183, 65, 14))
+                    .size(18.0)
+                );
+        });
+
+            let mut theme = egui_extras::syntax_highlighting::CodeTheme::from_memory(ui.ctx(), ui.style());
 
             ui.hyperlink_to("The Rust Programming Language book", "https://doc.rust-lang.org/stable/book");
-
-            egui::Frame::new().fill(egui::Color32::RED).show(ui, |ui| {
-                ui.label("Label with red background");
-            });
 
             ui.horizontal(|ui| {
                 ui.label("Write something: ");
@@ -52,8 +61,6 @@ pub fn central_panel_ui(
 
             ui.separator();
 
-
-
             ui.horizontal(|ui| {
 
                 ui.hyperlink_to("eframe source code.", "https://github.com/emilk/eframe_template");
@@ -66,6 +73,17 @@ pub fn central_panel_ui(
                 if ui.button("Toggle Area 3").clicked() {
                     *show_area3 = !*show_area3;
                 }
+
+            ui.label("Language:");
+                ui.add_enabled_ui(false, |ui|{
+                    ui.text_edit_singleline(language);
+                });
+                ui.collapsing("Theme", |ui| {
+                    ui.group(|ui| {
+                        theme.ui(ui);
+                        theme.clone().store_in_memory(ui.ctx());
+                    });
+                });
             });
 
             if *show_area1 {
@@ -77,25 +95,6 @@ pub fn central_panel_ui(
                         .corner_radius(5),
                 );
 
-        ui.horizontal(|ui| {
-                ui.label("Language:");
-                ui.text_edit_singleline(language);
-            });
-        ui.horizontal_wrapped(|ui| {
-                ui.spacing_mut().item_spacing.x = 0.0;
-                ui.label("Syntax highlighting powered by ");
-                ui.hyperlink_to("syntect", "https://github.com/trishume/syntect");
-                ui.label(".");
-
-            });
-
-        let mut theme = egui_extras::syntax_highlighting::CodeTheme::from_memory(ui.ctx(), ui.style());
-        ui.collapsing("Theme", |ui| {
-            ui.group(|ui| {
-                theme.ui(ui);
-                theme.clone().store_in_memory(ui.ctx());
-            });
-        });
         let mut layouter = |ui: &egui::Ui, text: &str, wrap_width: f32| {
             let mut layout_job = egui_extras::syntax_highlighting::highlight(
                 ui.ctx(),
@@ -132,6 +131,12 @@ fn main() {
                         .desired_width(f32::INFINITY)
                         .layouter(&mut layouter),
                 );
+                ui.horizontal_wrapped(|ui| {
+                    ui.spacing_mut().item_spacing.x = 0.0;
+                    ui.label("Syntax highlighting powered by ");
+                    ui.hyperlink_to("syntect", "https://github.com/trishume/syntect");
+                    ui.label(".");
+                });
             });
         }
 
@@ -192,13 +197,16 @@ fn main() {
                         .fit_to_exact_size(egui::vec2(50.0, 50.0))
                         .corner_radius(5),
                 );
-                ui.label("Cool Floating Rustacean in an egui::Area. Areas are dragable, click the center and hold and drag area around to desired position. egui::Area itself does not directly control its size — it wraps content and takes the size of whatever UI elements are inside it.");
 
-                ui.add(
-                    egui::Image::new(egui::include_image!("../assets/Rust_logo_animated1.gif"))
-                        .fit_to_exact_size(egui::vec2(200.0, 200.0))
-                        .corner_radius(5),
-                );
+                ui.label("Cool Floating Rustacean in an egui::Area. Areas are dragable, Drag and Reposition an Area using the 'Rustferris' image in the top left of each area, or anywhere else on an Area it seems! just not on text. The position of an area persists from where it was last dragged and positioned. click the center and hold and drag area around to desired position. egui::Area itself does not directly control its size — it wraps content and takes the size of whatever UI elements are inside it.");
+                egui::Frame::new().fill(egui::Color32::WHITE).show(ui, |ui| {
+                    ui.label(RichText::new("Label with white background, Rust hex color")
+                        .color(egui::Color32::from_rgb(183, 65, 14))
+                        .size(16.0)
+                    );
+                });
+
+
             });
         }
 
