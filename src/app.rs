@@ -72,6 +72,11 @@ impl eframe::App for TemplateApp {
     fn update(&mut self, ctx: &egui::Context, _frame: &mut eframe::Frame) {
         // Put your widgets into a `SidePanel`, `TopBottomPanel`, `CentralPanel`, `Window` or `Area`.
         // For inspiration and more examples, go to https://emilk.github.io/egui
+
+        // let mut style = (*ctx.style()).clone();
+        // style.visuals.override_text_color = Some(Color32::from_rgb(183, 65, 14));
+        // ctx.set_style(style);
+
         if self.first_frame {
             ctx.set_visuals(egui::Visuals::light());
             self.first_frame = false;
