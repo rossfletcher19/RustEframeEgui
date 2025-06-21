@@ -3,6 +3,7 @@ use eframe::egui;
 pub fn top_panel_ui(ctx: &egui::Context) {
     egui::TopBottomPanel::top("top_panel").show(ctx, |ui| {
         // The top panel is often a good place for a menu bar:
+        const FERRIS_SAYS: &str = "Keep calm and match on.";
 
         egui::menu::bar(ui, |ui| {
             // NOTE: no File->Quit on web pages!
@@ -17,6 +18,7 @@ pub fn top_panel_ui(ctx: &egui::Context) {
             }
 
             egui::widgets::global_theme_preference_buttons(ui);
+            ui.label(egui::RichText::new(FERRIS_SAYS).italics());
         });
     });
 }
