@@ -205,17 +205,25 @@ pub const FUNCTIONS: &str = r#"
 
 Functions are used prevalently in Rust.
 
-There is one of the most important funtions, the 'main' function, the entry point of many programs. In RUST we use the fn keyword to allow us to declare new functions.
-
-For function and variable names, RUST uses snake case, where all letters are lowercase and underscores seperate words. example_snake_case
+There is one of the most important funtions, the 'main' function, the entry point of many programs.
 
 // ================================================
 // 1. Function Basics
 // ================================================
+// For function and variable names, RUST uses snake case, where all letters are lowercase and underscores seperate words. example_snake_case
+// Functions are defined by the use of the fn keyword, followed by a function name and a set of parentheses, then a set of curly brackets to tell the compiler where the function body begins and ends.
 
-// Functions are declared using the `fn` keyword.
-// The name follows snake_case convention.
-// Function definitions go before they are called.
+fn basic_function() {
+    // This function takes no arguments and returns nothing
+    println!("This is a basic function call.");
+}
+
+// ================================================
+// 2. Defining and Calling Functions
+// ================================================
+
+// Any function can then be called by entering its name followed by a set of parentheses.
+// Functions can be defined before or after your main function, as Rust does not care where you define your functions, you just need to be sure they are defined somewhere in a scope that can be seen by the caller.
 
 fn main() {
     println!("Welcome to the Rust functions demo!");
@@ -232,17 +240,13 @@ fn main() {
 }
 
 // ================================================
-// 2. Defining and Calling Functions
-// ================================================
-fn basic_function() {
-    // This function takes no arguments and returns nothing
-    println!("This is a basic function call.");
-}
-
-// ================================================
 // 3. Function Parameters
 // ================================================
-// Parameters are variables that are part of a function's signature
+// Functions in Rust can be defined to have parameters. Parameters in functions are special variables that are part of a functions signature. When parameters are defined for a function, you can pass it values for those parameters. Values passed into function parameters are also called arguments. But the words parameter and argument are often used interchangeably in casual conversation to describe the variables in a functions definition or the values passed in when a function is called.
+
+// The type of each parameter is required to be declared in function signatures. This is deliberate by design in Rust. To determine what type you are using, The compiler almost never needs you to use them elsewhere, since the type annotations are required in function definitions.
+
+// Multiple parameters are defined by separating parameter declarations with commas.
 
 fn print_measurement(value: i32, unit_label: char) {
     // Parameters must have types explicitly declared
@@ -252,7 +256,7 @@ fn print_measurement(value: i32, unit_label: char) {
 // ================================================
 // 4. Function Return Values
 // ================================================
-// Functions can return values with the `->` syntax
+// Functions can return values with the `->` syntax, followed by the type of the return value.
 
 fn plus_one(x: i32) -> i32 {
     // Implicit return: no semicolon means the value is returned
@@ -265,8 +269,18 @@ fn plus_one(x: i32) -> i32 {
 // ================================================
 // - Statements: instructions that perform actions and do not return a value
 // - Expressions: evaluate to a value
+// A series of statements optionally ending in an expression are what make up Function bodies. Rust is an expression based language and this is important to understand, as other languages don't have that same distinction.
 
-// For example:
+// Statements are instructions that perform some action and do not return a value.
+Expressions evaluate to a resultant value
+
+// Function definitions are statements. 
+
+// Statements do not have return values.
+
+// For example, let y = 6 is a statement as it does not have a return value. This in not like other languages where the assignment returns the value of the assignment, such as in C or Ruby.
+
+// Another example:
 fn _statement_vs_expression() {
     let y = {
         let x = 3;
@@ -295,5 +309,32 @@ fn multiply_add(a: i32, b: i32, c: i32) -> i32 {
 // - Use `->` to specify a return type
 // - Expression without semicolon for return
 // - Function calls must match parameter types
+"#;
 
+pub const COMMENTS: &str = r#"  
+// Demonstrates comments in Rust as described in Chapter 3.4 of The Rust Book.
+
+// Comments are used to explain code, making it easier to understand.
+
+fn main() {
+    // Simple line comment
+    // This is a single-line comment in Rust.
+    // It starts with `//` and continues to the end of the line.
+
+    // Multi-line comment using repeated `//`:
+    // Sometimes you want to write a longer explanation.
+    // It's idiomatic in Rust to use multiple single-line comments for this.
+
+    /*
+        Block comment:
+        These are less common but can span multiple lines
+        without needing to start each line with `//`.
+    */
+
+    let x = 5; // Inline comment: This sets x to 5
+
+    let y = x + 1; // Adds 1 to x and stores it in y
+
+    println!("x = {}, y = {}", x, y); // Prints the values
+}
 "#;
