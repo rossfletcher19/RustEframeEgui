@@ -27,14 +27,14 @@ pub fn side_panel_ui(ctx: &egui::Context, state: &mut SidePanelState) {
             ui.heading("Common Rust Concepts");
             if ui.button("📦 Variables, Mutability & DataTypes").clicked() {
                 if state.spp1 {
-                    state.spp1 = false;
+                    state.spp1 = !state.spp1;
                 } else {
                     state.spp1 = true;
                 }
             }
             if ui.button("📦 Functions").clicked() {
                 if state.spp2 {
-                    state.spp2 = false;
+                    state.spp2 = !state.spp2;
                 } else {
                     state.spp2 = true;
                 }
@@ -63,7 +63,7 @@ pub fn side_panel_ui(ctx: &egui::Context, state: &mut SidePanelState) {
                 };
 
                 egui::ScrollArea::vertical()
-                    .max_height(600.0) // Limit height for scrollability
+                    .max_height(750.0) // Limit height for scrollability
                     .show(ui, |ui| {
                         ui.add_sized(
                             [ui.available_width(), 800.0],
@@ -104,7 +104,7 @@ pub fn side_panel_ui(ctx: &egui::Context, state: &mut SidePanelState) {
                 };
 
                 egui::ScrollArea::vertical()
-                    .max_height(600.0) // Limit height for scrollability
+                    .max_height(750.0) // Limit height for scrollability
                     .show(ui, |ui| {
                         ui.add_sized(
                             [ui.available_width(), 800.0],
