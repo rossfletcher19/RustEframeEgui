@@ -13,11 +13,12 @@ pub struct TemplateApp {
     x: i32,
     first_frame: bool,
     language: String,
-    code: String,
+    // code: String,
     show_area1: bool,
     show_area2: bool,
     show_area3: bool,
     side_panel_state: side_panel::SidePanelState,
+    central_panel_state: central_panel::CentralPanelState,
 
     // This is how you opt-out of serialization of a field
     #[serde(skip)]
@@ -37,11 +38,12 @@ impl Default for TemplateApp {
             x: 5,
             first_frame: true,
             language: "rs".into(),
-            code: String::new(),
+            // code: String::new(),
             show_area1: false,
             show_area2: false,
             show_area3: false,
             side_panel_state: side_panel::SidePanelState::new(),
+            central_panel_state: central_panel::CentralPanelState::new(),
         }
     }
 }
@@ -88,15 +90,8 @@ impl eframe::App for TemplateApp {
 
         central_panel::central_panel_ui(
             ctx,
-            &mut self.value,
-            &mut self.label,
-            &mut self.language,
-            &mut self.name_input,
-            &mut self.counter,
-            &mut self.x,
-            &mut self.show_area1,
-            &mut self.show_area2,
-            &mut self.show_area3,
+            &mut self.central_panel_state
+            
         );
     }
 }
