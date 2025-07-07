@@ -1,6 +1,36 @@
 use eframe::egui;
 use egui::RichText;
 
+/// We derive Deserialize/Serialize so we can persist app state on shutdown.
+#[derive(serde::Deserialize, serde::Serialize)]
+pub struct CentralPanelState {
+    pub value: f32,
+    pub label: String,
+    pub language: String,
+    pub name_input: String,
+    pub counter: i32,
+    pub x: i32,
+    pub show_area1: bool,
+    pub show_area2: bool,
+    pub show_area3: bool,
+}
+
+impl CentralPanelState {
+    pub fn new() -> Self {
+        Self {
+            label: "Hello Worldddd!!!".to_owned(),
+            value: 3.5,
+            counter: 0,
+            name_input: String::new(),
+            x: 5,
+            language: "rs".into(),
+            show_area1: false,
+            show_area2: false,
+            show_area3: false,
+        }
+    }
+}
+
 fn increment(counter: &mut i32) {
     *counter += 1;
 }
@@ -14,18 +44,7 @@ fn printx(x: &mut i32) {
     println!("the value of x is {}", x);
 }
 
-pub fn central_panel_ui(
-    ctx: &egui::Context,
-    value: &mut f32,
-    label: &mut String,
-    language: &mut String,
-    name_input: &mut String,
-    counter: &mut i32,
-    x: &mut i32,
-    show_area1: &mut bool,
-    show_area2: &mut bool,
-    show_area3: &mut bool,
-) {
+pub fn central_panel_ui(ctx: &egui::Context, central_panel_state: &mut CentralPanelState) {
     egui::CentralPanel::default().show(ctx, |ui| {
         ui.horizontal(|ui|{
             ui.add(
@@ -45,18 +64,18 @@ pub fn central_panel_ui(
 
             ui.horizontal(|ui| {
                 ui.label("Write something: ");
-                ui.text_edit_singleline(label);
+                ui.text_edit_singleline(&mut central_panel_state.label);
             });
 
-            ui.add(egui::Slider::new(value, 0.0..=10.0).text("value"));
+            ui.add(egui::Slider::new(&mut central_panel_state.value, 0.0..=10.0).text("value"));
             if ui.button("Increment").clicked() {
-                *value += 1.0;
+                central_panel_state.value += 1.0;
             }
 
-            if label.is_empty() {
+            if central_panel_state.label.is_empty() {
 
             } else {
-                ui.label(format!("Your text shows here: {}", label));
+                ui.label(format!("Your text shows here: {}", central_panel_state.label));
             }
 
             ui.separator();
@@ -65,18 +84,18 @@ pub fn central_panel_ui(
 
                 ui.hyperlink_to("eframe source code.", "https://github.com/emilk/eframe_template");
                 if ui.button("Toggle Area 1").clicked() {
-                    *show_area1 = !*show_area1;
+                    central_panel_state.show_area1 = !central_panel_state.show_area1;
                 }
                 if ui.button("Toggle Area 2").clicked() {
-                    *show_area2 = !*show_area2;
+                    central_panel_state.show_area2 = !central_panel_state.show_area2;
                 }
                 if ui.button("Toggle Area 3").clicked() {
-                    *show_area3 = !*show_area3;
+                    central_panel_state.show_area3 = !central_panel_state.show_area3;
                 }
 
             ui.label("Language:");
                 ui.add_enabled_ui(false, |ui|{
-                    ui.text_edit_singleline(language);
+                    ui.text_edit_singleline(&mut central_panel_state.language);
                 });
                 ui.collapsing("Theme", |ui| {
                     ui.group(|ui| {
@@ -86,7 +105,7 @@ pub fn central_panel_ui(
                 });
             });
 
-            if *show_area1 {
+            if central_panel_state.show_area1 {
             egui::Area::new(egui::Id::new("code_area1")).movable(true).show(ctx, |ui| {
                 ui.label("Drag and Reposition an Area using the 'Rustferris' image in the top left of each area, or anywhere else on an Area it seems! just not on text. The position of an area persists from where it was last dragged and positioned");
                 ui.add(
@@ -101,7 +120,7 @@ pub fn central_panel_ui(
                 ui.style(),
                 &theme,
                 text,
-                language,
+                &mut central_panel_state.language,
             );
             layout_job.wrap.max_width = wrap_width;
             ui.fonts(|f| f.layout_job(layout_job))
@@ -140,7 +159,7 @@ fn main() {
             });
         }
 
-        if *show_area2 {
+        if central_panel_state.show_area2 {
             egui::Area::new(egui::Id::new("my_area2"))
             .movable(true)
             .show(ctx, |ui| {
@@ -159,36 +178,36 @@ fn main() {
 
                         ui.horizontal(|ui| {
                             ui.label("Enter your name:");
-                            ui.text_edit_singleline(name_input);
+                            ui.text_edit_singleline(&mut central_panel_state.name_input);
                         });
 
                         ui.separator();
 
                         if ui.button("Increment").clicked() {
-                            increment(counter);
+                            increment(&mut central_panel_state.counter);
                         }
 
                         if ui.button("Reset").clicked() {
-                            reset(counter);
+                            reset(&mut central_panel_state.counter);
                         }
 
                         if ui.button("PrintLn").clicked() {
-                            printx(x);
+                            printx(&mut central_panel_state.x);
                         }
 
-                        ui.label(format!("Counter value: {}", counter));
+                        ui.label(format!("Counter value: {}", central_panel_state.counter));
 
-                        if name_input.is_empty() {
+                        if central_panel_state.name_input.is_empty() {
 
                         } else {
-                            ui.label(format!("Welcome, {}!", name_input));
+                            ui.label(format!("Welcome, {}!", central_panel_state.name_input));
                         }
                     });
             });
 
         }
 
-        if *show_area3 {
+        if central_panel_state.show_area3 {
             egui::Area::new(egui::Id::new("my_area"))
             .movable(true)
             .show(ctx, |ui| {
