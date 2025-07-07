@@ -88,10 +88,7 @@ impl eframe::App for TemplateApp {
 
         side_panel::side_panel_ui(ctx, &mut self.side_panel_state);
 
-        central_panel::central_panel_ui(
-            ctx,
-            &mut self.central_panel_state
-            
-        );
+        central_panel::central_panel_ui(ctx, &mut self.central_panel_state);
+        
     }
 }
