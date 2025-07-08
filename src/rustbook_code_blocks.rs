@@ -77,7 +77,7 @@ Why This Matters:
 | ------------------- | --------------------------------- | ------------------------ |
 | Mutability          | Always immutable                  | Immutable by default     |
 | Declaration Keyword | `const`                           | `let` or `let mut`       |
-| Type Annotation     | **Required**                      | Optional (type inferred) |
+| Type Annotation     | **Required**                      | **Required**             |
 | Scope               | Any (including global scope)      | Typically local scope    |
 | Value Requirement   | Must be a **constant expression** | Can be a runtime value   |
 
@@ -104,10 +104,10 @@ Summary:
 
 | Concept     | Keyword     | Mutable by Default | Can Change Type | Redeclaring Allowed     |
 |-------------|-------------|--------------------|-----------------|-------------------------|
-| Variable    | `let`       | ❌ No              | ❌ No          | ✅ With shadowing        |
-| Mutable Var | `let mut`   | ✅ Yes             | ❌ No          | ❌                       |
-| Constant    | `const`     | ❌ No              | ❌ No          | ❌                       |
-| Shadowing   | `let` again | ✅ Yes             | ✅ Yes         | ✅ (via new declaration) |
+| Variable    | `let`       | ❌ No              | ❌ No          | ✅ With shadowing       |
+| Mutable Var | `let mut`   | ✅ Yes             | ❌ No          | ❌ No                   |
+| Constant    | `const`     | ❌ No              | ❌ No          | ❌ No                   |
+| Shadowing   | `let` again | ✅ Yes             | ✅ Yes         | ✅ (via new declaration)|
 
 ___________________________________________________________________________________
 Data Types
