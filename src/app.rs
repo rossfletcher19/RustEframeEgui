@@ -6,23 +6,13 @@ use crate::top_panel::{self};
 #[derive(serde::Deserialize, serde::Serialize)]
 #[serde(default)] // if we add new fields, give them default values when deserializing old state
 pub struct TemplateApp {
-    // Example stuff:
-    label: String,
-    counter: i32,
-    name_input: String,
-    x: i32,
+    // Define your app state here.
     first_frame: bool,
-    language: String,
-    // code: String,
-    show_area1: bool,
-    show_area2: bool,
-    show_area3: bool,
     side_panel_state: side_panel::SidePanelState,
     central_panel_state: central_panel::CentralPanelState,
-
     // This is how you opt-out of serialization of a field
-    #[serde(skip)]
-    value: f32,
+    // #[serde(skip)]
+    // value: f32,
 }
 
 impl Default for TemplateApp {
@@ -31,17 +21,7 @@ impl Default for TemplateApp {
             /*
             Example stuff:
             */
-            label: "Hello Worldddd!!!".to_owned(),
-            value: 3.5,
-            counter: 0,
-            name_input: String::new(),
-            x: 5,
             first_frame: true,
-            language: "rs".into(),
-            // code: String::new(),
-            show_area1: false,
-            show_area2: false,
-            show_area3: false,
             side_panel_state: side_panel::SidePanelState::new(),
             central_panel_state: central_panel::CentralPanelState::new(),
         }
@@ -89,6 +69,5 @@ impl eframe::App for TemplateApp {
         side_panel::side_panel_ui(ctx, &mut self.side_panel_state);
 
         central_panel::central_panel_ui(ctx, &mut self.central_panel_state);
-        
     }
 }
