@@ -77,7 +77,7 @@ Why This Matters:
 | ------------------- | --------------------------------- | ------------------------ |
 | Mutability          | Always immutable                  | Immutable by default     |
 | Declaration Keyword | `const`                           | `let` or `let mut`       |
-| Type Annotation     | **Required**                      | **Required**             |
+| Type Annotation     | **Required**                      | Optional (type inferred) |
 | Scope               | Any (including global scope)      | Typically local scope    |
 | Value Requirement   | Must be a **constant expression** | Can be a runtime value   |
 
